@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= title
+  p Navya Muttukuri Lab10 #{title}
+  br
+  button(type="button", class="btn btn-dark",onclick="doBump()") Press Me
+  br
+  br
+  div(id="bump") bump the count
+  script.
+    var bump=1;
+    var count = 0;
+    function doBump() {
+    count = count+bump;
+    bump=bump+1;
+    document.getElementById("bump").innerHTML = "bump " +bump+ " count" +count;
+   } 

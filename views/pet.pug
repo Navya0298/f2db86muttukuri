@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1= title
+  br
+  - var results = [{pet_type:"Cats", breed: "Ragdoll", cost:2500}, {pet_type:"Dogs", breed: "American Eskimo Dog", cost:8300},{pet_type:"Rabbits", breed: "American rabbit", cost:6050}]
+   div(class = "container-fluid")
+    div(class = "row")
+     each item,index in results
+        div(class="col-sm-2" onclick=`buy(${index})`) pet_type: #{item.pet_type} 
+        br
+        br 
+        div(class="col-sm-2" onclick=`buy(${index})`) breed: #{item.breed}
+        br
+        br  
+        div(class="col-sm-2" onclick=`buy(${index})`) cost: #{item.cost}
+   script.
+          function buy(itemNo)
+          {
+              alert(`You purchased item ${itemNo+1}`)
+          }          
