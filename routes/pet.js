@@ -1,9 +1,8 @@
 var express = require('express');
+const pet_controlers= require('../controllers/pet');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('pet', { title: 'Search Results by pet breed' });
-});
+router.get('/', pet_controlers.pet_view_all_Page);
 
 module.exports = router;
