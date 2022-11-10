@@ -43,7 +43,7 @@ app.use('/users', usersRouter);
 app.use('/pet', petRouter);
 app.use('/gridbuild', gridbuildRouter);
 app.use('/selector', selctorRouter);
-app.use('/resource', resourceRouter);
+app.use('/resource', resourceRouter); 
 
 
 // catch 404 and forward to error handler
