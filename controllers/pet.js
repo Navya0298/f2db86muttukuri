@@ -74,6 +74,7 @@ exports.pet_create_post = async function(req, res) {
         res.send(`{"error": ${err}}`); 
     }   
 }; 
+
 // for a specific pet. 
 exports.pet_detail = async function(req, res) { 
     console.log("detail"  + req.params.id) 
@@ -84,4 +85,28 @@ exports.pet_detail = async function(req, res) {
         res.status(500) 
         res.send(`{"error": document for id ${req.params.id} not found`); 
     } 
+};
+
+// Handle Costume update form on PUT. 
+exports.pet_update_put = async function(req, res) { 
+    console.log(`update on id ${req.params.id} with body 
+${JSON.stringify(req.body)}`) 
+    try { 
+        let toUpdate = await pet.findById( req.params.id) 
+        // Do updates of properties 
+        if(req.body.pet_type)  
+               toUpdate.pet_type = req.body.pet_type; 
+        if(req.body.cost) toUpdate.cost = req.body.cost; 
+        if(req.body.breed) toUpdate.breed = req.body.breed; 
+        let result = await toUpdate.save(); 
+        console.log("Sucess " + result) 
+        res.send(result) 
+    } catch (err) { 
+        res.status(500) 
+        res.send(`{"error": ${err}: Update for id ${req.params.id} 
+failed`); 
+    } 
 }; 
+
+
+ 
