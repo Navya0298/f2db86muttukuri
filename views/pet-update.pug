@@ -1,0 +1,49 @@
+extends layout 
+
+block content 
+ h1(class = 'container-fluid p-5 bg-success text-warning text-center')= title 
+
+  if (toShow == null) 
+    h2 No instance to Update View 
+  else 
+    - let objectId = toShow._id
+    - let pet_type = toShow.pet_type
+    - let cost = toShow.cost 
+    - let breed = toShow.breed 
+   
+    div.row(class='d-flex justify-content-center p-2 bg-light text-center text-danger') 
+      div.mr-1(class = "p-2 flex-fill") Object ID is #{objectId} 
+    - let actionId = "/resource/pet/" + objectId 
+    form(id='petForm' class='justify-content-center p-2 bg-light text-center text-dark',action= actionId, method="PUT")
+      div.form-group
+        label.petAttr(for='pet_type' style="margin-right: 5px;") pet_type
+        input#pet_type(type='text', name='pet_type' value = pet_type  style="width:500px;")
+      br
+      div.form-group 
+        label.petAttr(for='cost' style="margin-right: 5px;") cost
+        input#cost(type='number', name='cost' value = cost style="width:500px;") 
+      br
+      div.form-group 
+        label.petAttr(for='breed' style="margin-right: 5px;") breed
+        input#breed(type='text', name='breed' value = breed  style="width:500px;") 
+      br
+      input(class="btn btn-success" type="submit") 
+
+
+  script. 
+    document.forms['petForm'].addEventListener('submit', (event) => { 
+      event.preventDefault(); 
+      // TODO do something here to show user that form is being submitted 
+      fetch(event.target.action, { 
+        method: 'PUT', 
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Update succeded") 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Update failed " + error ) 
+      }); 
+    }); 
