@@ -2,11 +2,11 @@ const mongoose = require("mongoose")
 
 const petSchema = mongoose.Schema({
 
-    pet_type: String,
+    pet_type: {type: String,required: [true, 'pet type cannot be empty']},
 
     cost: Number,
 
-    breed: String,
+    breed: {type: String,required: [true, 'pet breed cannot be empty']},
 
 })
 
